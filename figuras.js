@@ -123,3 +123,27 @@ function calcularAreaTriangulo(){
     const areaT = areaTriangulo(valuebase, valuealtura);
     alert(areaT);
 }
+
+function calcularDiametroCirculo(){
+    const radio2 = document.getElementById("radioC");
+    const valueradio = parseFloat(radio2.value);
+
+    const diametroC =diametroCirculo(valueradio);
+    alert(diametroC);
+}
+
+function calcularPerimetroCirculo(){
+    const radio2 = document.getElementById("radioC");
+    const valueradio = parseFloat(radio2.value);
+
+    const perimetroC = perimetroCirculo(valueradio);
+    alert(perimetroC);
+}
+
+function calcularAreaCirculo(){
+    const radio2 = document.getElementById("radioC");
+    const valueradio = parseFloat(radio2.value);
+
+    const areaC = areaCirculo(valueradio);
+    alert(areaC);
+}
