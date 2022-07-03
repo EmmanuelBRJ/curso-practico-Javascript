@@ -1,39 +1,27 @@
-function calcularMediana(lista){
-    
-    function calcularNumeroMediano(lista){
-        const sumaLista = lista.reduce(
-            function (valorAcumulado = 0, nuevoElemento){
-                return valorAcumulado + nuevoElemento;
-            }
-        );
+function calcularMediana (){
+    // crear e inicializar la variable valores y destructurar el objeto arguments para poder manipularlo 
+    const valores = [...arguments];
+    valores.sort((a, b) => a - b); // ordenar los datos mediante el método sort de menor a mayor 
 
-        const promedioLista = sumaLista / lista.length;
-        return promedioLista;
-    }
+    const mitadLista = parseInt(valores.length / 2);
 
-    const mitadLista = parseInt(lista.length / 2);
+    let mediana;
 
-    function esPar(numerito){
-        if (numerito % 2 === 0){
-            return true;
-        } else {
-            return false;
-        }
-    }
+    if (valores.length % 2 === 0){
+        const elemento1 = valores[mitadLista - 1];
+        const elemento2 = valores[mitadLista];
+        const promedioElementos = (elemento1 + elemento2) / 2;
 
-    if (esPar(lista.length)){
-        const elemento1 = lista[mitadLista - 1];
-        const elemento2 = lista[mitadLista];
-
-        const promedioElemento1y2 = calcularNumeroMediano([elemento1, elemento2]);
-
-        let mediana = promedioElemento1y2;
-        return mediana;
+        mediana = promedioElementos;
 
     } else {
-        let mediana = lista[mitadLista];
-        return mediana;
+        mediana = valores[mitadLista];
     }
+
+    return mediana;
+    
 }
 
-console.log(calcularMediana(100, 200, 300, 400));
+
+console.log(calcularMediana(10, 25, 50, 100, 5, 8));
+console.log(calcularMediana(10, 25, 100, 5, 8));
