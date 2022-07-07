@@ -1,27 +1,40 @@
-function calcularMediana (){
+function calcularMediana(){
     // crear e inicializar la variable valores y destructurar el objeto arguments para poder manipularlo 
-    const valores = [...arguments];
-    valores.sort((a, b) => a - b); // ordenar los datos mediante el método sort de menor a mayor 
+    /* const valores = [...arguments];
+    valores.sort((a, b) => a - b); // ordenar los datos mediante el método sort de menor a mayor  */
 
-    const mitadLista = parseInt(valores.length / 2);
+    // se captura los datos del html y se guardan los valores dentro de una variable
+
+    const entradaMediana = document.getElementById("dataMediana");
+    const medianaValue = entradaMediana.value;
+
+    // Al ser un string los valores capturados, se procede a convertir el formato a Number
+
+    let arrayMediana = Array.from(medianaValue.split(","), Number);
+
+    // Ordenamos los valores de la lista desordenada mediante el método sort() de menor a mayor
+
+    const listaOrdenada = arrayMediana.sort((numMenor, numMayor) => numMenor - numMayor);
+
+
+    // Hallamos la mitad de la cantidad de elementos de la lista y lo redondeamos con la funcion parseInt()
+
+    const mitadLista = parseInt(listaOrdenada.length / 2);
 
     let mediana;
 
-    if (valores.length % 2 === 0){
-        const elemento1 = valores[mitadLista - 1];
-        const elemento2 = valores[mitadLista];
+    if (listaOrdenada.length % 2 === 0){
+        const elemento1 = listaOrdenada[mitadLista - 1];
+        const elemento2 = listaOrdenada[mitadLista];
         const promedioElementos = (elemento1 + elemento2) / 2;
 
         mediana = promedioElementos;
 
     } else {
-        mediana = valores[mitadLista];
+        mediana = listaOrdenada[mitadLista];
     }
 
-    return mediana;
-    
+    // Enviamos los resultados obtenidos a la página html para su visualización 
+    const mostrarResultado = document.getElementById("resultadoMediana");
+    mostrarResultado.innerText = `La mediana es de: ${mediana}`;
 }
-
-
-console.log(calcularMediana(10, 25, 50, 100, 5, 8));
-console.log(calcularMediana(10, 25, 100, 5, 8));
