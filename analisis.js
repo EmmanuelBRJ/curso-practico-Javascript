@@ -1,4 +1,39 @@
+/* Puesto que para calcular la mediana debemos antes determinar si la cantidad de elementos 
+del arreglo es par o impar utilizamos la siguiente funcion, funciones Helpers*/ 
+
+function esPar(numerito){
+    return (numerito % 2 === 0);
+};
+
+// función para calcular la media aritmetica
+
+function calcularMediaAritmetica(){
+    const lista = [...arguments];
+    const sumaLista = lista.reduce(
+        (acumulado = 0, valor) => acumulado + valor);
+    
+    const promedioLista = sumaLista / lista.length;
+    return promedioLista;
+};
+
+// calculamos la mediana de salarios
+// Calculadora de medianas
+function medianaSalarios(salario){
+    const mitad = parseInt(salario.length /2);
+    if (esPar(salario.length)){
+        const personitaMitad1 = salario[mitad - 1];
+        const personitaMitad2 = salario[mitad];
+
+        const mediana = calcularMediaAritmetica(personitaMitad1, personitaMitad2);
+        return mediana;
+    } else {
+        const personitaMitad = salario[mitad];
+        return personitaMitad;
+    }
+};
+
 // Creamos un nuevo array solo con los salarios de los trabajadores
+// Mediana general
 const salariosCol = colombia.map(
     function (personita){
         return personita.salary;
@@ -12,41 +47,19 @@ const salariosColSorted = salariosCol.sort(
     }
 );
 
-/* Puesto que para calcular la mediana debemos antes determinar si la cantidad de elementos 
-del arreglo es par o impar utilizamos la siguiente funcion*/
+// 
+const medianaGeneralCol = medianaSalarios(salariosColSorted);
 
-function esPar(numerito){
-    return (numerito % 2 === 0);
-};
 
-// función para calcular la media aritmetica
+// mediana del top 10%
+const spliceStart = (salariosColSorted.length * 90) / 100;
+const spliceCount = salariosColSorted.length - spliceStart;
 
-function calcularMediaAritmetica(lista){
-    const sumaLista = lista.reduce(
-        function (acumulado, valor){
-            return acumulado + valor;
-        }, 0);
-    
-    const promedioLista = sumaLista / lista.length;
-    return promedioLista;
-};
+const salariosColTop10 = salariosColSorted.splice(spliceStart, spliceCount);
 
-// calculamos la mediana de salarios
+const medianaTop10Col = medianaSalarios(salariosColTop10);
 
-function medianaSalarios(lista){
-    const mitad = parseInt(lista.length /2);
-    if (esPar(lista.length)){
-        const personitaMidad1 = lista[mitad - 1];
-        const personitaMitad2 = lista[mitad];
-
-        const mediana = calcularMediaAritmetica(personitaMidad1, personitaMitad2);
-        return mediana;
-    } else {
-        const personitaMitad = lista[mitad];
-        return personitaMitad;
-    }
-};
-
-console.log(
-    medianaSalarios(salariosColSorted)
-);
+console.log({
+    medianaGeneralCol,
+    medianaTop10Col,
+});
